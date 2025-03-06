@@ -6,7 +6,7 @@ class Solution {
 
         // 1. 강아지 시작 위치 찾기 : park 배열 순회
         for (int i = 0; i < park.length; i++) { // 공원의 세로
-            for (int j = 0; j < park[0].length(); j++) { // 공원의 가로 (오타 수정 및 j++ 추가)
+            for (int j = 0; j < park[0].length(); j++) { // 공원의 가로
                 if (park[i].charAt(j) == 'S') {
                     position[0] = i;
                     position[1] = j;
