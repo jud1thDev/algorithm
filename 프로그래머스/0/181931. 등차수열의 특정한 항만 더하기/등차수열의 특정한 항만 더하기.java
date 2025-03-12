@@ -1,11 +1,12 @@
 class Solution {
     public int solution(int a, int d, boolean[] included) {
-        int result = 0;
-        for (int i=0; i<included.length; i++){
-            if (included[i]){
-                result += a + i*d;
-            }
+        int sum = 0;
+        for (int i = 0; i < included.length; i++){
+            int m = a + i*d;
+            if (included[i] == true) {
+                sum += m;
+            } 
         }
-        return result; 
+        return sum;
 }
 }
