@@ -2,25 +2,29 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] priorities, int location) {
-        Queue<int[]> waiting = new LinkedList<>();
+        int answer = 1;
         
-        for (int i = 0; i < priorities.length; i++) {
-            waiting.offer(new int[]{i, priorities[i]});
+        List<Integer> priorityList = new ArrayList<>();
+        for (int p : priorities){
+            priorityList.add(p);
         }
+        priorityList.sort(Collections.reverseOrder());
         
-        int count = 0;
+        int currentPriority = 0;
+        boolean found = false;
         
-        while (true) {
-            int[] current = waiting.poll();
-            
-            if (waiting.stream().anyMatch(p -> p[1] > current[1])) {
-                waiting.offer(current);
-            } else {
-                count++;
-                if (current[0] == location) {
-                    return count;
+        while (found == false){
+            for (int i = 0; i < priorities.length; i++){
+                if (priorities[i] == priorityList.get(currentPriority)){
+                    if (i == location){
+                        found = true;
+                        break;
+                    }
+                    answer ++;
+                    currentPriority++;
                 }
             }
         }
+        return answer;
     }
 }
