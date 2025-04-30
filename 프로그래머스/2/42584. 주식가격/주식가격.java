@@ -3,22 +3,23 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] prices) {
         int[] ans = new int[prices.length];
-        Stack<Integer> protecting = new Stack<>(); // 가격 방어중인 애들 idx
+        Stack<Integer> protecting = new Stack<>();
         
-        for (int i = 0; i < prices.length; i++){
-            while (!protecting.isEmpty() && prices[i] < prices[protecting.peek()]){ // 가격 떨어짐
+        for(int i = 0; i < prices.length; i++){
+            int current = prices[i];
+            // 가격 떨어지는 경우 처리
+            while(!protecting.isEmpty() && current < prices[protecting.peek()]){
                 int top = protecting.pop();
                 ans[top] = i - top;
             }
             protecting.push(i);
         }
         
-        // 끝까지 가격이 안 떨어진 애들 처리
+        // 가격이 한 번도 안 떨어진 경우
         while (!protecting.isEmpty()){
             int top = protecting.pop();
             ans[top] = prices.length - top - 1;
         }
-        
         return ans;
     }
 }
