@@ -16,14 +16,17 @@ def solution():
 
         elif gender ==2: # 여자 
             check = given -1 
-            switches[check] = change_switch(switches[check]) # 중심 스위치 상태 변경
             left = check - 1
             right = check + 1
+            
+            # 대칭구간 찾기
             while left >= 0 and right < n and switches[left] == switches[right]:
-                switches[left] = change_switch(switches[left])
-                switches[right] = change_switch(switches[right])
                 left -= 1
                 right += 1
+           
+            # 대칭 구간 전체 상태 변경
+            for i in range(left + 1, right):
+	            switches[i] = change_switch(switches[i])
 
     results = []
 
