@@ -1,16 +1,13 @@
 def solution(triangle):
     n = len(triangle)
-    d = [0] * n
-    d[0] = triangle[0][0]
+    d = [[0] * (i + 1) for i in range(n)]  
 
-    for i in range(1, n):
-        row = triangle[i]
-        for j in range(i, -1, -1):
-            if j == 0:
-                d[j] = d[j] + row[j]
-            elif j == i:
-                d[j] = d[j - 1] + row[j]
-            else:
-                d[j] = max(d[j - 1], d[j]) + row[j]
+    def dfs(i, j):
+        if i == n - 1:  # 바닥
+            return triangle[i][j]
+        if d[i][j] != 0:  # 이미 계산
+            return d[i][j]
+        d[i][j] = triangle[i][j] + max(dfs(i + 1, j), dfs(i + 1, j + 1))
+        return d[i][j]
 
-    return max(d)
+    return dfs(0, 0)
